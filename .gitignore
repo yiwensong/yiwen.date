@@ -162,3 +162,6 @@ typings/
 
 # next.js build output
 .next
+
+# bundle.js is built by webpack
+yiwen_dot_date/static/bundle.js
