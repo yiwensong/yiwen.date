@@ -162,7 +162,7 @@ class YDAppBar extends React.Component {
                                 <MenuIcon />
                             </IconButton>
                             <Typography type="title" color="inherit" className={classes.flex} noWrap>
-                                Yiwen Song
+                                yiwen song (is single)
                             </Typography>
                         </Toolbar>
                     </AppBar>
@@ -178,19 +178,8 @@ class YDAppBar extends React.Component {
                                 [classes['open-content']]: this.state.open,
                             }
                         )}>
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
-                        <YDContent />
+                        <YDContent title="wow this is a title" img="https://storage.googleapis.com/yiwen_dot_date_img/bw-yiwen-1.jpg" content="this is a string."/>
+                        <br />
                     </div>
                 </div>
             </main>

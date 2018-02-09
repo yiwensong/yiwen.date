@@ -9,3 +9,7 @@ run: venv
 .PHONY: nosslrun
 nosslrun: venv
 	sudo venv/bin/gunicorn --reload --bind 0.0.0.0:80 autoapp:app
+
+.PHONY: webpack
+webpack:
+	webpack --watch
