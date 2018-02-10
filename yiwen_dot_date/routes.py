@@ -5,10 +5,19 @@ from flask import Flask
 app = Flask('yiwen_dot_date')
 
 
+@app.before_request
+def before_request():
+    if flask.request.url.startswith('http://'):
+        url = flask.request.url.replace('http://', 'https://', 1)
+        code = 301
+        return flask.redirect(url, code=code)
+
+
 @app.route('/')
 def index():
     content = 'yiwen.date!'
     return flask.render_template('index.html', content=content)
+
 
 @app.route('/CNAME')
 def cname():

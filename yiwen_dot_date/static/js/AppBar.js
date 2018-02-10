@@ -44,6 +44,7 @@ const the_theme = createMuiTheme({
 const styles = theme => ({
     root: {
         width: '100%',
+        'min-width': '500px',
         //        marginTop: theme.spaceing.unit * 3,
         zIndex: 1,
         overflow: 'hidden',
@@ -76,6 +77,7 @@ const styles = theme => ({
     },
     content: {
         width: '100%',
+        'min-width': '500px',
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         marginTop: `calc(${appbarHeight}px + 1px)`,

@@ -11,6 +11,7 @@ const styles = theme => ({
     },
     contentPaperBase: theme.mixins.gutters({
         // paddingTop: 16,
+        margin: 'auto',
         paddingBottom: 16,
         marginTop: theme.spacing.unit * 3,
     }),
@@ -18,7 +19,7 @@ const styles = theme => ({
         width: '60%',
         'min-width': '400px',
         'text-align': 'left',
-        'margin-left': '20%',
+        // 'margin-left': '20%',
         'padding-left': '0px',
         'padding-right': '0px',
     },

@@ -4,7 +4,8 @@ venv: setup.py requirements*.txt
 
 .PHONY: run
 run: venv
-	sudo venv/bin/gunicorn --config gunicorn_conf.py autoapp:app
+	sudo venv/bin/gunicorn --reload --bind 0.0.0.0:80 autoapp:app &
+	sudo venv/bin/gunicorn --config gunicorn_conf.py autoapp:app &
 
 .PHONY: nosslrun
 nosslrun: venv
