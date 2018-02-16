@@ -19,6 +19,12 @@ def index():
     return flask.render_template('index.html', content=content)
 
 
+@app.route('/submit_response', methods=['POST'])
+def response():
+    form = flask.request.form
+    return
+
+
 @app.route('/CNAME')
 def cname():
     return app.send_static_file('CNAME')

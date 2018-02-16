@@ -64,7 +64,7 @@ const cards = [
     {
         title: 'sloth in the streets; starfish in the sheets',
         url: 'https://storage.googleapis.com/yiwen_dot_date_img/bw-yiwen-1.jpg',
-        content: "this line works a lot better on girls' tinders.",
+        content: "this line is a lot more effective on girls' tinder bios.",
     },
     {
         title: 'just your typical abg, but like a guy',
