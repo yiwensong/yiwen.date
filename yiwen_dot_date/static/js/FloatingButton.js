@@ -48,16 +48,23 @@ class YDButton extends React.Component {
                     onClose={handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Call me, maybe</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            To subscribe to this website, please enter your email address here. We will send
-                            updates occationally.
+                            Hey! I hope you enjoyed looking at my pictures. If you'd like to get in contact,
+                            please fill this form out with your info and I'll get back to you as soon as I can!
                         </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"
                             id="name"
+                            label="Name"
+                            type="name"
+                            fullWidth
+                        />
+                        <TextField
+                            margin="dense"
+                            id="email"
                             label="Email Address"
                             type="email"
                             fullWidth
@@ -75,10 +82,10 @@ class YDButton extends React.Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
-                            Cancel
+                            cancel
                         </Button>
                         <Button onClick={handleClose} color="primary">
-                            Subscribe
+                            submit
                         </Button>
                     </DialogActions>
                 </Dialog>
