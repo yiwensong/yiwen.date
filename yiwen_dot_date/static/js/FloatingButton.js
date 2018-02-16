@@ -82,7 +82,7 @@ class YDButton extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <Button fab color="primary" aria-label="add" className={classes.button} onClick={handleClickOpen}>
+                <Button variant="fab" color="primary" aria-label="add" className={classes.button} onClick={handleClickOpen}>
                     <Icon>message</Icon>
                 </Button>
             </div>

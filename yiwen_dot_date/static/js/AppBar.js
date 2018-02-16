@@ -115,7 +115,7 @@ class YDAppBar extends React.Component {
         const {classes, theme} = this.props;
         const drawer = (
             <Drawer
-                type="persistent"
+                variant="persistent"
                 classes={{
                     paper: classes.drawerPaper,
                 }}
@@ -163,7 +163,7 @@ class YDAppBar extends React.Component {
                             <IconButton className={classes.menuButton} onClick={toggleDrawer} color="inherit" aria-label="Menu">
                                 <MenuIcon />
                             </IconButton>
-                            <Typography type="title" color="inherit" className={classes.flex} noWrap>
+                            <Typography variant="title" color="inherit" className={classes.flex} noWrap>
                                 yiwen song (is single)
                             </Typography>
                         </Toolbar>
