@@ -78,6 +78,7 @@ class YDButton extends React.Component {
                             fullWidth
                             rows={4}
                             defaultValue="Hi yiwen, I'm single too!"
+                            placeholder="Hi yiwen, I'm single too!"
                         />
                     </DialogContent>
                     <DialogActions>

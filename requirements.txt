@@ -6,3 +6,4 @@ Werkzeug
 wheel
 ipython
 gunicorn
+pyyaml

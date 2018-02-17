@@ -1,9 +1,13 @@
+import smtplib
 import flask
+import yaml
 
 from flask import Flask
 
 app = Flask('yiwen_dot_date')
 
+GMAIL_USERNAME = 'yiwen.date@gmail.com'
+GMAIL_APP_KEY_FILE = '/etc/api_keys/gmail/gmail_app_pw.yaml'
 
 @app.before_request
 def before_request():
@@ -21,8 +25,24 @@ def index():
 
 @app.route('/submit_response', methods=['POST'])
 def response():
-    form = flask.request.form
-    return
+    request_data = yaml.load(flask.request.data)
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    with open(GMAIL_APP_KEY_FILE, 'r') as pw_key_file:
+        password = yaml.load(pw_key_file)
+        server.login(GMAIL_USERNAME, password)
+    msg = f'''Hello {request_data['name']}!
+    I'm glad that you enjoyed my website.
+    - yiwen'''
+    server.sendmail(GMAIL_USERNAME, request_data['email'], msg)
+    server.quit()
+
+    response = app.response_class(
+        response='{}',
+        status=200,
+        mimetype='application/json',
+    )
+    return response
 
 
 @app.route('/CNAME')
