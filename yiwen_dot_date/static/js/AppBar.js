@@ -173,20 +173,15 @@ class YDAppBar extends React.Component {
                         <div className={classNames(
                             classes.content,
                             {
-                            }
-                        )}>
-                        <div className={classNames(
-                            {
                                 [classes['open-content']]: this.state.open,
                             }
                         )}>
-                        <YDContent title="wow this is a title" img="https://storage.googleapis.com/yiwen_dot_date_img/bw-yiwen-1.jpg" content="this is a string."/>
-                        <br />
-                    </div>
+                            <YDContent />
+                            <br />
+                        </div>
+                    </main>
                 </div>
-            </main>
-        </div>
-    </MuiThemeProvider>
+            </MuiThemeProvider>
         );
     }
 }

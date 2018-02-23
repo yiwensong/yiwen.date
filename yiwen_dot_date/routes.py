@@ -32,9 +32,17 @@ def response():
         password = yaml.load(pw_key_file)
         server.login(GMAIL_USERNAME, password)
     msg = f'''Hello {request_data['name']}!
-    I'm glad that you enjoyed my website.
+I'm glad that you enjoyed my website.
     - yiwen'''
+    print (request_data)
     server.sendmail(GMAIL_USERNAME, request_data['email'], msg)
+
+    message_to_me = f'''{request_data['message']}
+
+----------
+from: {request_data['name']}
+email: {request_data['email']}'''
+    server.sendmail(GMAIL_USERNAME, GMAIL_USERNAME, message_to_me)
     server.quit()
 
     response = app.response_class(

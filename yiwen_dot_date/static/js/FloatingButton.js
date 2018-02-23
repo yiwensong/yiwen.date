@@ -10,6 +10,9 @@ import Dialog, {
 import TextField from 'material-ui/TextField';
 import { withStyles } from 'material-ui/styles';
 import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import Snackbar from 'material-ui/Snackbar';
+import CloseIcon from 'material-ui-icons/Close';
 
 const styles = theme => ({
     button: {
@@ -20,13 +23,21 @@ const styles = theme => ({
         left: 'auto',
         position: 'fixed',
     },
+    close: {
+    },
 });
+
 
 class YDButton extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
+            email_value: '',
+            name_value: '',
+            msg_value: "Hi yiwen, I'm single too!",
+            snackbar: false,
+            snackbarSuccess: true,
         };
     }
 
@@ -39,6 +50,63 @@ class YDButton extends React.Component {
 
         const handleClose = () => {
             this.setState({open: false});
+        };
+
+        const submitSuccess = () => {
+            this.setState({snackbar: true, snackbarSuccess: true});
+        };
+
+        const submitFail = () => {
+            this.setState({snackbar: true, snackbarSuccess: false});
+        };
+
+        const snackbarClose = (event, reason) => {
+            if (reason === 'clickaway') {
+                return;
+            }
+            this.setState({snackbar: false});
+        };
+
+        const handleSubmit = (event) => {
+            fetch('/submit_response', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: this.state.email_value,
+                    name: this.state.name_value,
+                    message: this.state.msg_value,
+                })
+            }).then(function (response) {
+                if (response.ok) {
+                    submitSuccess();
+                } else {
+                    submitFail();
+                }
+            });
+            handleClose();
+        };
+
+        const handle_name_change = (event) => {
+            this.setState({name_value: event.target.value});
+        };
+
+        const handle_email_change = (event) => {
+            this.setState({email_value: event.target.value});
+        };
+
+        const handle_msg_change = (event) => {
+            this.setState({msg_value: event.target.value});
+        };
+
+        const renderSnackbarText = () => {
+            if (this.state.snackbarSuccess) {
+                return 'Your message has successfully sent!';
+            } else {
+                return 'Something went wrong! Please try again!';
+            }
         };
 
         return (
@@ -61,6 +129,8 @@ class YDButton extends React.Component {
                             label="Name"
                             type="name"
                             fullWidth
+                            value={this.state.name_value}
+                            onChange={handle_name_change}
                         />
                         <TextField
                             margin="dense"
@@ -68,6 +138,8 @@ class YDButton extends React.Component {
                             label="Email Address"
                             type="email"
                             fullWidth
+                            value={this.state.email_value}
+                            onChange={handle_email_change}
                         />
                         <TextField
                             multiline
@@ -77,15 +149,16 @@ class YDButton extends React.Component {
                             type="text"
                             fullWidth
                             rows={4}
-                            defaultValue="Hi yiwen, I'm single too!"
                             placeholder="Hi yiwen, I'm single too!"
+                            value={this.state.msg_value}
+                            onChange={handle_msg_change}
                         />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
                             cancel
                         </Button>
-                        <Button onClick={handleClose} color="primary">
+                        <Button onClick={handleSubmit} color="primary">
                             submit
                         </Button>
                     </DialogActions>
@@ -93,6 +166,30 @@ class YDButton extends React.Component {
                 <Button variant="fab" color="primary" aria-label="add" className={classes.button} onClick={handleClickOpen}>
                     <Icon>message</Icon>
                 </Button>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.snackbar}
+                    onClose={snackbarClose}
+                    autoHideDuration={6000}
+                    SnackbarContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">{renderSnackbarText()}</span>}
+                    action={[
+                        <IconButton
+                            key="close"
+                            aria-label="Close"
+                            color="inherit"
+                            className={classes.close}
+                            onClick={snackbarClose}
+                        >
+                            <CloseIcon />
+                        </IconButton>,
+                    ]}
+                />
             </div>
         );
     }
