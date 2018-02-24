@@ -69,7 +69,7 @@ const cards = [
     {
         title: 'just your typical abg, but like a guy',
         url: 'https://storage.googleapis.com/yiwen_dot_date_img/bw-yiwen-4.jpg',
-        content: "enjoys clubbing and boba.",
+        content: "enjoys boba, avocado toast, and barefoot moscato.",
     },
     {
         title: "I'm an open book but it's about math so you probably don't wanna read it.",
