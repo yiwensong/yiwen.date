@@ -8,6 +8,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
 import { withStyles } from 'material-ui/styles';
 import MenuIcon from 'material-ui-icons/Menu';
 import Typography from 'material-ui/Typography';
@@ -91,6 +92,34 @@ const styles = theme => ({
     },
 });
 
+const links = [
+    {
+        text: 'facebook',
+        link: 'https://facebook.com/siwenyong',
+        icon: 'contacts',
+    },
+    {
+        text: 'instagram',
+        link: 'https://instagram.com/ineverwin',
+        icon: 'photo'
+    },
+    {
+        text: 'personal site',
+        link: 'http://yiwensong.com',
+        icon: 'person',
+    },
+    {
+        text: 'linkedin',
+        link: 'https://linkedin.com/in/iamyiwen',
+        icon: 'work',
+    },
+    {
+        text: 'github',
+        link: 'https://github.com/yiwensong/yiwen.date',
+        icon: 'code',
+    },
+];
+
 class YDAppBar extends React.Component {
     constructor(props) {
         super(props);
@@ -102,15 +131,22 @@ class YDAppBar extends React.Component {
     render() { 
         const handleDrawerOpen = () => {
             this.setState({open: true});
-        }
+        };
 
         const handleDrawerClose = () => {
             this.setState({open: false});
-        }
+        };
 
         const toggleDrawer = () => {
             this.setState({open: !this.state.open});
-        }
+        };
+
+        const openLink = (url) => {
+            return function () {
+                var win = window.open(url, '_blank');
+                win.focus();
+            };
+        };
 
         const {classes, theme} = this.props;
         const drawer = (
@@ -125,24 +161,14 @@ class YDAppBar extends React.Component {
                 <div className={classes.drawerInner}>
                     <Divider />
                     <List className={classes.list}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary='List Item' />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary='Another one' />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary='Yeet' />
-                        </ListItem>
+                        {links.map( (x,i) =>
+                            <ListItem button onClick={openLink(x.link)} key={x.text}>
+                                <ListItemIcon>
+                                    <Icon>{x.icon}</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary={x.text} />
+                            </ListItem>
+                        )}
                     </List>
                 </div>
             </Drawer>
