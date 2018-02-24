@@ -54,10 +54,15 @@ def response():
     mail.send(outbound)
 
     inbound = Message(
-        subject=f'''Message from {recipient_name} at {recipient_email}''',
+        subject=f'Message from {recipient_name} at {recipient_email}',
         sender=(recipient_name, MAIL_USERNAME),
         recipients=[MAIL_USERNAME],
-        body=incoming_message,
+        body=(
+            f'{incoming_message}\n\n'
+            '-----------\n'
+            f'from: {recipient_name}\n'
+            f'email: {recipient_email}\n'
+        ),
     )
     mail.send(inbound)
 
