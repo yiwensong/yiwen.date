@@ -158,7 +158,7 @@ class YDButton extends React.Component {
                         <Button onClick={handleClose} color="primary">
                             cancel
                         </Button>
-                        <Button onClick={handleSubmit} color="primary">
+                        <Button variant="raised" onClick={handleSubmit} color="primary">
                             submit
                         </Button>
                     </DialogActions>

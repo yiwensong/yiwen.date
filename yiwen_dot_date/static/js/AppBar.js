@@ -73,8 +73,8 @@ const styles = theme => ({
         width: drawerWidth,
     },
     'open-content': {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`
+        // marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
     },
     content: {
         width: '100%',
@@ -90,7 +90,28 @@ const styles = theme => ({
     appBarClass: {
         margin: '0px',
     },
+    'open-external': {
+        'margin-right': '0px',
+    },
 });
+
+const internal = [
+    {
+        text: 'home',
+        page: 'home',
+        icon: 'home',
+    },
+    {
+        text: 'about',
+        page: 'about',
+        icon: 'person_pin',
+    },
+    {
+        text: 'interests',
+        page: 'interests',
+        icon: 'weekend',
+    },
+]
 
 const links = [
     {
@@ -120,11 +141,18 @@ const links = [
     },
 ];
 
+const titles = {
+    home: 'yiwen song (is single)',
+    about: 'about yiwen',
+    interests: "yiwen's (not) exciting life",
+};
+
 class YDAppBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
+            page: 'home',
         };
     }
 
@@ -139,6 +167,15 @@ class YDAppBar extends React.Component {
 
         const toggleDrawer = () => {
             this.setState({open: !this.state.open});
+        };
+
+        const contentChange = (page) => {
+            return () => {
+                var prev_page = this.state.page;
+                this.setState({page: page});
+                if (prev_page != page)
+                    window.scrollTo(0, 0);
+            };
         };
 
         const openLink = (url) => {
@@ -161,8 +198,8 @@ class YDAppBar extends React.Component {
                 <div className={classes.drawerInner}>
                     <Divider />
                     <List className={classes.list}>
-                        {links.map( (x,i) =>
-                            <ListItem button onClick={openLink(x.link)} key={x.text}>
+                        {internal.map( (x,i) =>
+                            <ListItem button onClick={contentChange(x.page)} key={x.text}>
                                 <ListItemIcon>
                                     <Icon>{x.icon}</Icon>
                                 </ListItemIcon>
@@ -170,12 +207,25 @@ class YDAppBar extends React.Component {
                             </ListItem>
                         )}
                     </List>
+                    <Divider />
+                    <List className={classes.list}>
+                        {links.map( (x,i) =>
+                            <ListItem button onClick={openLink(x.link)} key={x.text}>
+                                <ListItemIcon>
+                                    <Icon>{x.icon}</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary={x.text} />
+                                <ListItemIcon className={classes['open-external']}>
+                                    <Icon>open_in_new</Icon>
+                                </ListItemIcon>
+                            </ListItem>
+                        )}
+                    </List>
                 </div>
             </Drawer>
         );
 
-        console.log(this.state.open);
-        console.log('ok');
+        var title = titles[this.state.page];
 
         return (
             <MuiThemeProvider theme={the_theme}>
@@ -190,7 +240,7 @@ class YDAppBar extends React.Component {
                                 <MenuIcon />
                             </IconButton>
                             <Typography variant="title" color="inherit" className={classes.flex} noWrap>
-                                yiwen song (is single)
+                                {title}
                             </Typography>
                         </Toolbar>
                     </AppBar>
@@ -202,7 +252,7 @@ class YDAppBar extends React.Component {
                                 [classes['open-content']]: this.state.open,
                             }
                         )}>
-                            <YDContent />
+                            <YDContent content={this.state.page} />
                             <br />
                         </div>
                     </main>
