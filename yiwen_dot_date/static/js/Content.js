@@ -5,12 +5,12 @@ import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
+import Icon from 'material-ui/Icon';
 
 const styles = theme => ({
     content_base: {
     },
     contentPaperBase: theme.mixins.gutters({
-        // paddingTop: 16,
         margin: 'auto',
         paddingBottom: 16,
         marginTop: theme.spacing.unit * 3,
@@ -19,7 +19,6 @@ const styles = theme => ({
         width: '60%',
         'min-width': '400px',
         'text-align': 'left',
-        // 'margin-left': '20%',
         'padding-left': '0px',
         'padding-right': '0px',
     },
@@ -126,9 +125,11 @@ const interests_content = [
                         var win = window.open('https://www.liusharon.com/blog/ultimate', '_blank');
                         win.focus();
                     }}
+                    variant="flat"
                     color="secondary"
                 >
                     Photo Credits - Sharon Liu
+                    <Icon style={{marginLeft: '.3em'}}>open_in_new</Icon>
                 </Button>
             </div>
         ),

@@ -14,39 +14,21 @@ import MenuIcon from 'material-ui-icons/Menu';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
-import { createMuiTheme } from 'material-ui/styles';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { createMuiTheme } from 'material-ui/styles';
 
 
 import YDContent from './Content.js';
+import siteTheme from './siteTheme.js';
 
 
 const drawerWidth = 240;
 const appbarHeight = 64;
 
-
-const the_theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#ff5c8d',
-      main: '#d81b60',
-      dark: '#a00037',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#819ca9',
-      main: '#546e7a',
-      dark: '#29434e',
-      contrastText: '#fff',
-    },
-  },
-});
-
 const styles = theme => ({
     root: {
         width: '100%',
         'min-width': '500px',
-        //        marginTop: theme.spaceing.unit * 3,
         zIndex: 1,
         overflow: 'hidden',
     },
@@ -64,7 +46,6 @@ const styles = theme => ({
         marginRight: 20,
     },
     drawerPaper: {
-        // position: 'relative',
         marginTop: `${appbarHeight}px`,
         height: `calc(100vh - ${appbarHeight}px)`,
         width: drawerWidth,
@@ -73,7 +54,6 @@ const styles = theme => ({
         width: drawerWidth,
     },
     'open-content': {
-        // marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
     },
     content: {
@@ -83,9 +63,6 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.default,
         marginTop: `calc(${appbarHeight}px + 1px)`,
         height: `calc(100% - ${appbarHeight}px)`,
-        // marginLeft: -drawerWidth,
-        // 'text-align': 'center',
-        // marginTop: 56,
     },
     appBarClass: {
         margin: '0px',
@@ -199,7 +176,7 @@ class YDAppBar extends React.Component {
                     <Divider />
                     <List className={classes.list}>
                         {internal.map( (x,i) =>
-                            <ListItem button onClick={contentChange(x.page)} key={x.text}>
+                            <ListItem button color="secondary" onClick={contentChange(x.page)} key={x.text}>
                                 <ListItemIcon>
                                     <Icon>{x.icon}</Icon>
                                 </ListItemIcon>
@@ -228,7 +205,7 @@ class YDAppBar extends React.Component {
         var title = titles[this.state.page];
 
         return (
-            <MuiThemeProvider theme={the_theme}>
+            <MuiThemeProvider theme={siteTheme()}>
                 <div
                     className={classNames(
                         classes.root,
