@@ -20,7 +20,7 @@ import { createMuiTheme } from 'material-ui/styles';
 
 import YDContent from './Content.js';
 import siteTheme from './siteTheme.js';
-
+import pages from './pages.js';
 
 const drawerWidth = 240;
 const appbarHeight = 64;
@@ -72,24 +72,6 @@ const styles = theme => ({
     },
 });
 
-const internal = [
-    {
-        text: 'home',
-        page: 'home',
-        icon: 'home',
-    },
-    {
-        text: 'about',
-        page: 'about',
-        icon: 'person_pin',
-    },
-    {
-        text: 'interests',
-        page: 'interests',
-        icon: 'weekend',
-    },
-]
-
 const links = [
     {
         text: 'facebook',
@@ -118,11 +100,9 @@ const links = [
     },
 ];
 
-const titles = {
-    home: 'yiwen song (is single)',
-    about: 'about yiwen',
-    interests: "yiwen's (not) exciting life",
-};
+const titles = new Map(pages.map(function(page){
+    return[ page.metadata.page_name, page.metadata.title ];
+}));
 
 class YDAppBar extends React.Component {
     constructor(props) {
@@ -175,12 +155,12 @@ class YDAppBar extends React.Component {
                 <div className={classes.drawerInner}>
                     <Divider />
                     <List className={classes.list}>
-                        {internal.map( (x,i) =>
-                            <ListItem button color="secondary" onClick={contentChange(x.page)} key={x.text}>
+                        {pages.map( (x,i) =>
+                            <ListItem button color="secondary" onClick={contentChange(x.metadata.page_name)} key={i}>
                                 <ListItemIcon>
-                                    <Icon>{x.icon}</Icon>
+                                    <Icon>{x.metadata.icon}</Icon>
                                 </ListItemIcon>
-                                <ListItemText primary={x.text} />
+                                <ListItemText primary={x.metadata.button_name} />
                             </ListItem>
                         )}
                     </List>
@@ -202,7 +182,7 @@ class YDAppBar extends React.Component {
             </Drawer>
         );
 
-        var title = titles[this.state.page];
+        var title = titles.get(this.state.page);
 
         return (
             <MuiThemeProvider theme={siteTheme()}>
